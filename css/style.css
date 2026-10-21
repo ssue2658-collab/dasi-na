@@ -1,0 +1,6 @@
+/* 디자인은 아직 적용하지 않고, Google Fonts Noto Sans KR 글꼴 적용만 설정 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+}
