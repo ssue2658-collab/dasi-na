@@ -1,6 +1,373 @@
-/* 디자인은 아직 적용하지 않고, Google Fonts Noto Sans KR 글꼴 적용만 설정 */
+/* ==========================================
+   1. CSS 변수(:root) 및 기본 설정
+   ========================================== */
+:root {
+    --primary-color: #116951;    /* 딥 포레스트 그린 (일러스트 배경색) */
+    --accent-color: #FF4B82;     /* 비비드 핑크 (토끼 포인트 컬러) */
+    --sub-accent: #FF8400;       /* 활기찬 오렌지 링 포인트 */
+    --text-color: #222222;       /* 가독성 높은 다크 텍스트 */
+    --bg-color: #F9F6EE;         /* 따뜻한 크림 화이트 */
+    --card-bg: #FFFFFF;          /* 카드 배경용 순백색 */
+}
+
 body {
     font-family: 'Noto Sans KR', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
     margin: 0;
     padding: 0;
+    line-height: 1.6;
+}
+
+/* 링크 및 리스트 초기화 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 섹션 제목 공통 스타일 (강조색 짧은 밑줄) */
+section h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 00px; /*--밑줄의 고정된 길이 -> 고정크기 대신 클자 크기 전체에 꽉 차게 변경*/
+    height: 4px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+}
+
+
+/* ==========================================
+   2. 헤더 영역 (스크롤 고정)
+   ========================================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    box-shadow: 0 4px 12px rgba(17, 105, 81, 0.2);
+    z-index: 1000;
+    text-align: center;
+    padding: 1.2rem 0;
+    border-bottom: 5px solid var(--accent-color);
+}
+
+header .site-kicker {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--sub-accent);
+    margin: 0 0 0.2rem 0;
+    font-weight: 700;
+}
+
+header h1 {
+    font-size: 1.4rem;
+    color: var(--bg-color);
+    margin: 0;
+}
+
+header .header-name {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: 0.2rem 0;
+    color: #FFD166;
+}
+
+header .header-intro {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+
+/* ==========================================
+   3. 내비게이션 영역 (Flexbox 사용)
+   ========================================== */
+nav {
+    position: fixed;
+    top: 110px; /* 헤더 높이에 맞추어 고정 배치 */
+    left: 0;
+    width: 100%;
+    background-color: var(--text-color);
+    z-index: 999;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.7rem 0;
+}
+
+nav ul li a {
+    color: var(--bg-color);
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: color 0.2s;
+}
+
+nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+
+/* ==========================================
+   4. 메인 콘텐츠 및 공통 섹션 레이아웃
+   ========================================== */
+main {
+    padding: 180px 1rem 3rem 1rem; /* 고정 헤더·내비게이션 아래로 여백 확보 */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+section {
+    padding: 2.5rem 0;
+    border-bottom: 2px dashed #E0DCD0;
+}
+
+
+/* ==========================================
+   5. 소개 섹션 (프로필 사진 원형 처리)
+   ========================================== */
+#about .profile-figure {
+    margin: 0;
+    text-align: center;
+}
+
+#about img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 1rem auto;
+    object-fit: cover;
+    border: 4px solid var(--accent-color);
+    box-shadow: 0 8px 20px rgba(255, 75, 130, 0.25);
+}
+
+#about figcaption {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.about-copy {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid var(--primary-color);
+}
+
+.about-lead {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+
+
+/* ==========================================
+   6. 경력 및 카드 영역 (Grid 사용)
+   ========================================== */
+#career {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+}
+
+#career h2 {
+    grid-column: 1 / -1;
+}
+
+/* 경력 카드 디자인 */
+.career-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid var(--accent-color);
+}
+
+.career-period {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.career-card h3 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+.career-role {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 0.8rem;
+}
+
+
+/* ==========================================
+   7. 역량 및 교육·자격 리스트 스타일
+   ========================================== */
+.simple-list {
+    background-color: var(--card-bg);
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.simple-list li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #F0EFEA;
+    font-size: 0.95rem;
+}
+
+.simple-list li:last-child {
+    border-bottom: none;
+}
+
+.simple-list span {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+
+/* ==========================================
+   8. 문의 섹션 및 푸터
+   ========================================== */
+#contact {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    border-bottom: none;
+}
+
+#contact h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#contact a {
+    color: var(--accent-color);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    font-size: 0.85rem;
+    margin-top: 2rem;
+}
+
+
+/* ==========================================
+   9. 반응형 미디어쿼리 (Responsive Styles)
+   ========================================== */
+
+/* 태블릿 화면 기준 (768px 이상) */
+@media screen and (min-width: 768px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2.5rem;
+        text-align: left;
+    }
+
+    header h1 {
+        font-size: 1.3rem;
+    }
+
+    nav {
+        position: static;
+        width: auto;
+        background-color: transparent;
+        border-bottom: none;
+    }
+
+    nav ul {
+        gap: 1.8rem;
+        padding: 0;
+    }
+
+    nav ul li a {
+        color: var(--bg-color);
+        font-weight: 500;
+    }
+
+    nav ul li a:hover {
+        color: var(--sub-accent);
+    }
+
+    main {
+        padding-top: 130px;
+        max-width: 760px;
+    }
+
+    /* 소개 섹션: 사진 왼쪽, 글 오른쪽 배치 */
+    #about {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    #about .profile-figure {
+        flex-shrink: 0;
+    }
+
+    .about-copy {
+        flex: 1;
+        margin: 0;
+    }
+
+    /* 경력 카드: 2열 Grid 배치 */
+    #career {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+
+/* PC 화면 기준 (1024px 이상) */
+@media screen and (min-width: 1024px) {
+    main {
+        max-width: 960px;
+    }
+
+    #about img {
+        width: 240px;
+        height: 240px;
+    }
+
+    section h2 {
+        font-size: 1.8rem;
+    }
 }
